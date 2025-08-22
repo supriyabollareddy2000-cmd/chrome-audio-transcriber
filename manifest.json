@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Real-Time Audio Transcriber",
+  "version": "2.0.0",
+  "description": "Capture tab audio and transcribe in real-time with a side panel.",
+  "permissions": ["tabCapture", "activeTab", "sidePanel", "storage"],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*",
+    "https://generativelanguage.googleapis.com/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "side_panel": { "default_path": "sidepanel.html" },
+  "action": { "default_title": "Open Transcriber" }
+}
