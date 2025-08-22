@@ -44,3 +44,17 @@ Side Panel (UI + AudioWorklet) → PCM → WAV encoder → Background queue (ret
 
 ## License
 MIT
+
+flowchart TD
+  A[Chrome Tab Audio] -->|tabCapture / getDisplayMedia| B[Side Panel<br/>(AudioContext + AudioWorklet)]
+  B --> C[Chunker<br/>(30/60/90s) + 3s overlap]
+  C --> D[WAV Encoder<br/>(16-bit mono)]
+  D --> E[Background Service Worker Queue]
+  E -->|fetch| F[Gemini API<br/>generateContent (audio/wav)]
+  F --> E
+  E --> G[Side Panel UI<br/>(Log + Timestamps + Exports)]
+  B --> H[[Mic (optional)]]
+  H --> C
+  E --> I[Offline Buffer<br/>(chrome.storage.local)]
+  E --> J[Retry & Rate-limit<br/>(exponential backoff)]
+
